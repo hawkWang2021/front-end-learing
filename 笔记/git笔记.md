@@ -102,7 +102,7 @@ git rm --cached 文件名
 
 ```shell
 # 把本地main分支的最新修改推送至GitHub
-git push origin main
+git push -u origin master
 # 克隆一个本地库
 $ git clone git@github.com:HawkWang2021/gitskills.git
 ```
