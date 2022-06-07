@@ -4,22 +4,26 @@ const fs = require('fs');
 const path = require('path');
 const regStyle = /<style>[\s\S]*<\/style>/gi;
 const regScript = /<script>[\s\S]*<\/script>/gi;
-fs.readFile(path.join(__dirname, './素材/index.html'), 'utf8', (err, data) => {
-	if (err) {
-		return `文件读取错误,${err.message}`;
+fs.readFile(
+	path.join(__dirname, '../material/index.html'),
+	'utf8',
+	(err, data) => {
+		if (err) {
+			return `文件读取错误,${err.message}`;
+		}
+		console.log('文件读取成功');
+		resolveCSS(data);
+		resolveJS(data);
+		resolveHTML(data);
 	}
-	console.log('文件读取成功');
-	resolveCSS(data);
-	resolveJS(data);
-	resolveHTML(data);
-});
+);
 function resolveCSS(data) {
 	let dataStr = regStyle
 		.exec(data)[0]
 		.replace('<style>', '')
 		.replace('</style>', '');
 	fs.writeFile(
-		path.join(__dirname, './clock/index.css'),
+		path.join(__dirname, '../clock/index.css'),
 		dataStr,
 		function (err) {
 			if (err) {
@@ -35,7 +39,7 @@ function resolveJS(data) {
 		.replace('<script>', '')
 		.replace('</script>', '');
 	fs.writeFile(
-		path.join(__dirname, './clock/index.js'),
+		path.join(__dirname, '../clock/index.js'),
 		dataStr,
 		function (err) {
 			if (err) {
@@ -50,7 +54,7 @@ function resolveHTML(data) {
 		.replace(regStyle, `<link rel="stylesheet" href="./index.css">`)
 		.replace(regScript, `<script src="./index.js"></script>`);
 	fs.writeFile(
-		path.join(__dirname, './clock/index.html'),
+		path.join(__dirname, '../clock/index.html'),
 		dataStr,
 		function (err) {
 			if (err) {
