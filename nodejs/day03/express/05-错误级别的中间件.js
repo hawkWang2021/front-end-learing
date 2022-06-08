@@ -20,4 +20,3 @@ app.use(function (err, req, res, next) {
 app.listen(80, () => {
 	console.log(`server running at http://127.0.0.1`);
 });
-// *4. Express 内置的中间件

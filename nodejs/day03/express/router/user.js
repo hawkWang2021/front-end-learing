@@ -3,6 +3,7 @@
 
 // 1.导入 express
 const express = require('express');
+
 // 2.创建路由对象
 let router = express.Router();
 
@@ -12,8 +13,9 @@ router.get('/user/list', (req, res) => {
 });
 
 // 4.挂载添加用户的路由
-router.post('/user/list', (req, res) => {
+router.post('/user/add', (req, res) => {
 	res.send('Add new user.');
 });
+
 // 5.向外导出路由对象
 module.exports = router;

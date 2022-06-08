@@ -21,9 +21,18 @@ server.on('request', (req, res) => {
 	// 可以使用 mime 包设定 mime 类型
 	fs.readFile(fPath, 'utf8', (err, data) => {
 		// 需要动态设置 mime 类型,不能写死
+		// 方法一: 使用 path 包,有缺陷
+		// res.setHeader(
+		// 	'Content-Type',
+		// 	`text/${path.extname(fPath).replace('.', '')}; charSet=utf-8`
+		// );
+		// console.log(path.extname(fPath).replace('.', ''));
+		// 方法二: 使用 mime 包
 		res.setHeader('Content-Type', `${mime.getType(fPath)}; charSet=utf-8`);
+
 		if (err) {
-			content = '<h1>404 Not found!</h1>';
+			res.setHeader('Content-Type', `text/html; charSet=utf-8`);
+			content = `<h1>404 Not found! ${err.message}</h1>`;
 			return res.end(content);
 		}
 		content = data;

@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+	<head>
+		<meta charset="UTF-8" />
+		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title>Document</title>
+		<script src="http://cdn.staticfile.org/jquery/1.10.0/jquery.js"></script>
+	</head>
+	<body>
+		<button id="btnGET">GET</button>
+		<button id="btnPOST">POST</button>
+		<script>
+			$('#btnGET').on('click', function () {
+				$.ajax({
+					type: 'GET',
+					url: 'http://127.0.0.1/api/get',
+					data: {
+						username: '王垃圾',
+						age: 18,
+					},
+					success: function (response) {
+						console.log(response);
+					},
+				});
+			});
+			$('#btnPOST').on('click', function () {
+				$.ajax({
+					type: 'POST',
+					url: 'http://127.0.0.1/api/post',
+					data: {
+						bookname: '水浒传',
+						author: '施耐庵',
+					},
+					success: function (response) {
+						console.log(response);
+					},
+				});
+			});
+		</script>
+	</body>
+</html>

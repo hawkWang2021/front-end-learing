@@ -20,9 +20,10 @@ app.post('/', (req, res) => {
 const userRouter = require('./router/user');
 
 // 使用 app.use() 注册路由模块
+// 注意: app.ues() 函数的作用:注册全局中间件
 // app.use(router);
 
-// 使用 app.use() 注册路由模块,并添加同意的访问前缀 /api
+// 使用 app.use() 注册路由模块,并添加统一的访问前缀 /api
 
 app.use('/api', userRouter);
 

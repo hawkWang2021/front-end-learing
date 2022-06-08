@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+	<head>
+		<meta charset="UTF-8" />
+		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title>Document</title>
+		<script src="http://cdn.staticfile.org/jquery/1.10.0/jquery.js"></script>
+	</head>
+	<body>
+		<button id="GET">获取用户的基本信息</button>
+		<button id="POST">更新用户的基本信息</button>
+		<script>
+			$('#GET').on('click', function () {
+				$.ajax({
+					type: 'GET',
+					url: 'http://127.0.0.1/my/userinfo',
+					success: function (response) {
+						console.log(response);
+					},
+				});
+			});
+			$('#POST').on('click', function () {
+				$.ajax({
+					type: 'POST',
+					url: 'http://127.0.0.1/my/userinfo',
+					data: {
+						id: 1,
+						nickname: '小王',
+						email: '123456@qq.com',
+					},
+					success: function (response) {
+						console.log(response);
+					},
+				});
+			});
+		</script>
+	</body>
+</html>
