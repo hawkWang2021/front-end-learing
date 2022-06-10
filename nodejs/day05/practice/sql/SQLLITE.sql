@@ -1,0 +1,19 @@
+-- 查询操作
+-- SELECT * FROM users;
+-- SELECT username,password FROM users;
+-- 插入操作
+-- INSERT into users (username,password) VALUES ('tony stark','888888');
+-- 更新操作
+-- UPDATE users SET `password`='123456' WHERE id=7;
+-- UPDATE users SET `password`='admin123',`status`=1 WHERE id=2;
+-- 删除操作
+-- DELETE FROM users WHERE id=4;
+-- 标记删除，又叫软删除
+-- UPDATE users SET `status`=1 WHERE id=3;
+-- 查询对应用户名的信息
+-- SELECT * FROM users WHERE username='小红红' OR username='王老菊';
+-- SELECT * FROM users WHERE username='张三' AND `status`=0;
+-- 排序操作
+-- SELECT * FROM users ORDER BY `status` DESC,username ASC;
+-- 使用COUNT(*) 来统计 user 表中，状态为0的用户数量
+-- SELECT COUNT(*) AS total FROM users WHERE `status`=0;
