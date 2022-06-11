@@ -10,7 +10,7 @@ app.use(cors());
 // 导入解析表单的中间件
 app.use(express.urlencoded({ extended: false }));
 // ?响应数据的中间件
-app.use(function (req, res, next) {
+app.use((req, res, next) => {
 	// status 默认值为 1，表示失败的情况
 	// err 的值，可能是一个错误对象，也可能是一个错误的描述字符串
 	res.cc = function (err, status = 1) {
@@ -22,6 +22,9 @@ app.use(function (req, res, next) {
 	next();
 });
 
+// 导入并注册用户路由模块
+const userRouter = require('./router/user');
+app.use('/api', userRouter);
 // 定义错误级别的中间件
 app.use((err, req, res, next) => {
 	if (err instanceof joi.ValidationError) {
@@ -30,9 +33,6 @@ app.use((err, req, res, next) => {
 	// 未知错误
 	res.cc(err);
 });
-// 导入并注册用户路由模块
-const userRouter = require('./router/user');
-app.use('/api', userRouter);
 
 // 调用 app.listen() ,指定端口号并启动 web 服务器
 app.listen(80, () => {
