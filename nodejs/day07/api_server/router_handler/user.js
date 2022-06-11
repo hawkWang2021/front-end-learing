@@ -59,11 +59,6 @@ exports.regUser = (req, res) => {
 				res.cc('注册成功', 0);
 			}
 		);
-		// // 注册成功
-		// res.send({
-		// 	status: 0,
-		// 	message: '注册成功！',
-		// });
 	});
 };
 exports.login = (req, res) => {
