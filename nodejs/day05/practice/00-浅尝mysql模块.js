@@ -20,13 +20,13 @@ const db = mysql.createPool({
 // 	console.log(results);
 // });
 // # 查询 users 表中的特定内容
-// const sql = 'SELECT * FROM users WHERE id = ?';
-// db.query(sql, 3, (err, results) => {
-// 	if (err) {
-// 		return console.log(err.message);
-// 	}
-// 	console.log(results);
-// });
+const sql = 'SELECT * FROM users WHERE id = ?';
+db.query(sql, 3, (err, results) => {
+	if (err) {
+		return console.log(err.message);
+	}
+	console.log(results);
+});
 // 向 user 表中插入一条数据
 // const user = {
 // 	username: '王老菊',
