@@ -4,5 +4,5 @@
 
 ## 正在学习
 
-🚀[VUE中文文档]<https://vuejs.bootcss.com/guide/>
+🚀[VUE中文文档]<https://vuejs.bootcss.com/guide/><br/>
 💪[深入理解Vue.js实战]<https://godbasin.github.io/vue-ebook/>
