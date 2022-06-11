@@ -1,4 +1,4 @@
-const joi = require('joi');
+const joi = require('@hapi/joi');
 
 // string() 值必须是字符串
 // alphanum() 值必须是字母或数字
