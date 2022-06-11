@@ -4,7 +4,6 @@ const bcrypt = require('bcryptjs');
 exports.regUser = (req, res) => {
 	// 接收表单数据
 	const userinfo = req.body;
-	console.log(userinfo);
 	// 判断数据是否合法
 	// if (!userinfo.username || !userinfo.password) {
 	// 	return res.send({
@@ -60,11 +59,11 @@ exports.regUser = (req, res) => {
 				res.cc('注册成功', 0);
 			}
 		);
-		// 注册成功
-		res.send({
-			status: 0,
-			message: '注册成功！',
-		});
+		// // 注册成功
+		// res.send({
+		// 	status: 0,
+		// 	message: '注册成功！',
+		// });
 	});
 };
 exports.login = (req, res) => {
