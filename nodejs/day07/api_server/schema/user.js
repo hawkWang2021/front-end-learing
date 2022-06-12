@@ -21,7 +21,7 @@ exports.reg_login_schema = {
 	},
 };
 // 定义 id, nickname, email 的验证规则
-const id = joi.number().integer().min(1);
+const id = joi.number().integer().min(1).required();
 const nickname = joi.string().required();
 const email = joi.string().email().required();
 // 更新用户信息的验证规则对象
