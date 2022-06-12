@@ -62,5 +62,27 @@ exports.regUser = (req, res) => {
 	});
 };
 exports.login = (req, res) => {
+	const userinfo = req.body;
+	const sqlSelectUser = 'select * from ev_users where username=?';
+	db.query(sqlSelectUser, userinfo.username, (err, results) => {
+		console.log('results: ', results);
+		// 执行 SQL 语句出错
+		if (err) {
+			return res.cc(err);
+		}
+		// 执行 SQL 语句成功，但查询到的数据条数为0，说明用户名不存在
+		if (results.length === 0) {
+			return res.cc('用户名不存在');
+		}
+		// 对比用户输入的密码和数据库中的密码是否一致
+		const compareResult = bcrypt.compareSync(
+			userinfo.password,
+			results[0].password
+		);
+		// 若 compareResult 为 false，则表示密码不正确
+		if (!compareResult) {
+			return res.cc('密码不正确');
+		}
+	});
 	res.send('login success!');
 };
