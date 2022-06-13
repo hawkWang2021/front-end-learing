@@ -40,6 +40,10 @@ const userRouter = require('./router/user');
 app.use('/api', userRouter);
 // 导入并使用用户信息路由模块
 const userInfoRouter = require('./router/userinfo');
+// 导入并使用文章分类信息路由模块
+const artCateRouter = require('./router/artcate');
+// 为文章分类路由模块挂载路由
+app.use('/my/article', artCateRouter);
 // 以 /my 开头的接口，都需要验证 token
 app.use('/my', userInfoRouter);
 // 定义全局错误级别的中间件
