@@ -84,3 +84,18 @@ exports.updatePassword = (req, res) => {
 		});
 	});
 };
+// 更新用户头像的路由处理函数
+exports.updateAvatar = (req, res) => {
+	console.log(req.body);
+	const sql = 'UPdate ev_users SET user_pic=? WHERE id=?';
+	db.query(sql, [req.body.avatar, req.user.id], (err, results) => {
+		if (err) {
+			return res.cc(err);
+		}
+		if (results.affectedRows !== 1) {
+			return res.cc('更新头像失败');
+		}
+		// 更新头像成功
+		res.cc('更新头像成功', 0);
+	});
+};
