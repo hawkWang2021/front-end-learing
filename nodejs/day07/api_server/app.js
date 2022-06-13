@@ -17,6 +17,8 @@ app.use(express.urlencoded({ extended: false }));
 // BUG:在使用postman测试获取用户信息的接口时，登录的token字段错误，错误中间件捕捉不到错误信息，不能返回一个身份认证失败的对象，而是报错：res.cc is not a function
 // 拍错思路：cc 函数是挂载在一个全局中间件上的一个处理错误信息的函数，找不到这个函数，首先想到的是这个函数定义错误，但是别的接口，可以利用res.cc() 正常返回错误信息，说明函数本身定义的没有问题；然后想到了 cc 函数挂载的全局中间件可能是位置错误，导致 cc 函数还未挂载到 res 上，已经发生了错误，当错误中间件捕捉到错误后，在 res 上访问不到 res.cc 函数,经调试解决;
 // DONE:把响应数据的中间件放到 expressJWT 中间件的前面，这样就可以在中间件中捕捉到错误信息，返回错误信息，而不是报错
+// 托管静态资源到 public 目录下
+app.use('/uploads', express.static('./uploads'));
 // ?响应数据的中间件
 app.use((req, res, next) => {
 	// status 默认值为 1，表示失败的情况
@@ -42,8 +44,12 @@ app.use('/api', userRouter);
 const userInfoRouter = require('./router/userinfo');
 // 导入并使用文章分类信息路由模块
 const artCateRouter = require('./router/artcate');
+// 导入并使用文章信息路由模块
+const articleRouter = require('./router/article');
 // 为文章分类路由模块挂载路由
 app.use('/my/article', artCateRouter);
+// 为文章路由模块挂载路由
+app.use('/my/article', articleRouter);
 // 以 /my 开头的接口，都需要验证 token
 app.use('/my', userInfoRouter);
 // 定义全局错误级别的中间件
