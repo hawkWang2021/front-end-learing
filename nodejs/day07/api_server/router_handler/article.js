@@ -34,14 +34,10 @@ exports.addArticle = (req, res) => {
 
 // 获取文章列表的路由处理函数
 exports.getArticleList = (req, res) => {
-	console.log('req.query: ', req.query);
 	let pageSize = parseInt(req.query.pagesize); // 每页显示的条数
 	let pageCurrent = parseInt(req.query.pagenum); // 当前页码
 	let curr = (pageCurrent - 1) * pageSize; // 初始位置
-	let cate_id = req.query.cate_id; // 分类
-	let state = req.query.state; // 状态
 	let filterCondition = getFilter(req.query); // 查询条件
-	console.log('filterCondition: ', filterCondition);
 	// 根据当前页码和分页尺寸,获取文章局部列表
 	// BUG:注意这边连接匹配的是 ev_articles 表的 cate_id 字段，而不是 ev_articles 表的 id 字段
 	// MARK:需要根据前台传递的内容( req.query )，来确定查询的条件
