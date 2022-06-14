@@ -15,3 +15,11 @@ exports.add_article_schema = {
 		state,
 	},
 };
+// 定义 id 的验证规则
+const id = joi.number().integer().min(1).required();
+// 验证删除文章的验证规则对象
+exports.delete_article_schema = {
+	params: {
+		id,
+	},
+};

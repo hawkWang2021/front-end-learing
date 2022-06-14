@@ -11,7 +11,10 @@ const upload = multer({
 // 导入验证数据合法性的中间件
 const expressJoi = require('@escook/express-joi');
 // 导入验证数据合法性的规则对象
-const { add_article_schema } = require('../schema/article');
+const {
+	add_article_schema,
+	delete_article_schema,
+} = require('../schema/article');
 // 导入发布新文章的路由处理函数模块
 const articleHandler = require('../router_handler/article');
 // 发布新文章的路由模块
@@ -27,10 +30,13 @@ router.post(
 	expressJoi(add_article_schema),
 	articleHandler.addArticle
 );
-// TODO:根据 Id 删除文章的路由模块
-router.get('/delete/:id', (req, res) => {
-	res.send('ok');
-});
+
 // 获取文章列表的路由模块
 router.get('/list', articleHandler.getArticleList);
+// 根据 Id 删除文章的路由模块
+router.get(
+	'/delete/:id',
+	expressJoi(delete_article_schema),
+	articleHandler.deleteArticle
+);
 module.exports = router;
