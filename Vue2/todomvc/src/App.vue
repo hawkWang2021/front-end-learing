@@ -4,12 +4,18 @@
 // 3. todoFooter点击的时候-要将状态进行切换-子传父
 // 4. 父组件定义计算属性-根据状态筛选数据
 // 5. 要将筛选出来的计算属性-todoMain
+
+// # 清空已完成的 TODO
+// 1.清空标签 – 点击事件
+// 2.子传父 – App.vue – 一个清空方法
+// 3.过滤未完成的覆盖list数组 (不考虑恢复)
 <template>
   <section class="todoapp">
-    <todo-header @addTodo="addTodo"></todo-header>
+    <todo-header @addTodo="addTodo" :list="list"></todo-header>
     <todo-main @delTodo="delTodo" :list="showList"></todo-main>
     <todo-footer
       @updateStatus="updateStatus"
+      @clearCompleted="clearCompleted"
       :lastLength="lastLength"
       :status="status"
     ></todo-footer>
@@ -30,12 +36,16 @@ export default {
   },
   data() {
     return {
-      list: [
-        { id: 1, name: '背单词', done: true },
-        { id: 2, name: '刷题', done: false },
-        { id: 3, name: '模拟面试', done: false }
-      ],
+      list: JSON.parse(localStorage.getItem('todoList')) || [],
       status: 'all'
+    }
+  },
+  watch: {
+    list: {
+      deep: true,
+      handler() {
+        localStorage.setItem('todoList', JSON.stringify(this.list))
+      }
     }
   },
   methods: {
@@ -51,6 +61,9 @@ export default {
     },
     updateStatus(status) {
       this.status = status // 将子组件点击的状态赋值给父组件
+    },
+    clearCompleted() {
+      this.list = this.list.filter((item) => !item.done)
     }
   },
   computed: {
@@ -202,8 +215,9 @@ body {
   height: 65px;
   font-size: 0;
   position: absolute;
-  top: -65px;
+  top: -0px;
   left: -0;
+  z-index: 1;
 }
 
 .toggle-all + label:before {

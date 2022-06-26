@@ -6,8 +6,6 @@
 // 3. 父组件监听
 <template>
   <section class="main">
-    <input id="toggle-all" class="toggle-all" type="checkbox" />
-    <label htmlFor="toggle-all">Mark all as complete</label>
     <ul class="todo-list">
       <li v-for="item of list" :key="item.id" :class="{ completed: item.done }">
         <div class="view">

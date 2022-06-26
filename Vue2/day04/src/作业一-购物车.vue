@@ -77,6 +77,5 @@ export default {
 <style scoped>
 * {
   text-align: center;
-  color: red;
 }
 </style>

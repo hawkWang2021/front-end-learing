@@ -29,13 +29,20 @@
         >
       </li>
     </ul>
-    <button class="clear-completed">Clear completed</button>
+    <button class="clear-completed" @click="clearCompleted">
+      Clear completed
+    </button>
   </footer>
 </template>
 
 <script>
 export default {
-  props: ['lastLength', 'status']
+  props: ['lastLength', 'status'],
+  methods: {
+    clearCompleted() {
+      this.$emit('clearCompleted')
+    }
+  }
 }
 </script>
 
