@@ -1,13 +1,10 @@
 <template>
   <div id="app">
     <nav>
-      <router-link to="/home">Home</router-link> |
-      <!-- query形式 ?属性名=值 -->
-      <router-link to="/about?money=100&price=50">About</router-link>
-      |
-      <router-link to="/about/张三">动态路由传参数</router-link>
+      <router-link to="/">Home</router-link> |
+      <router-link to="/about">About</router-link>
     </nav>
-    <router-view></router-view>
+    <router-view/>
   </div>
 </template>
 

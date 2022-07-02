@@ -1,11 +1,11 @@
 import Vue from 'vue'
 import App from './App.vue'
 import router from './router'
-import '@/permission'
 
 Vue.config.productionTip = false
-
+import 'bootstrap/dist/css/bootstrap.css'
+import './assets/fonts/iconfont.css'
 new Vue({
-	router, // Vue.prototype.$router = router
+	router,
 	render: h => h(App)
 }).$mount('#app')
