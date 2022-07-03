@@ -2,7 +2,7 @@
   <div class="play">
     <!-- 模糊背景(靠样式设置), 固定定位 -->
     <div class="song-bg" :style="`background-image: url(${songInfo && songInfo.al && songInfo.al.picUrl
-    }?imageView&thumbnail=360y360&quality=75&tostatic=0);`"></div>
+    }?imageView&thumbnail=360y360&quality=75&tostatic=0);`"> </div>
     <!-- 播放页头部导航 -->
     <div class="header">
       <van-icon name="arrow-left" size="20" class="left-incon" @click="$router.back()" />
@@ -13,8 +13,7 @@
       <div class="song-turn ani" :style="`animation-play-state:${playState ? 'running' : 'paused'}`">
         <div class="song-img">
           <!-- &&写法是为了防止报错, 有字段再继续往下访问属性 -->
-          <img style="width: 100%" :src="`${songInfo && songInfo.al && songInfo.al.picUrl
-          }?imageView&thumbnail=360y360&quality=75&tostatic=0`" alt="" />
+          <img style="width: 100%" :src="pic" alt="" />
         </div>
       </div>
       <!-- 播放按钮 -->
@@ -40,7 +39,7 @@
     <!-- 播放音乐真正的标签
       看接口文档: 音乐地址需要带id去获取(但是有的歌曲可能404)
       https://binaryify.github.io/NeteaseCloudMusicApi/#/?id=%e8%8e%b7%e5%8f%96%e9%9f%b3%e4%b9%90-url
-     -->
+    -->
     <audio ref="audio" preload="true" :src="`https://music.163.com/song/media/outer/url?id=${id}.mp3`"></audio>
   </div>
 </template>
@@ -61,7 +60,8 @@ export default {
       songInfo: {}, // 歌曲信息
       lyric: {}, // 歌词枚举对象(需要在js拿到歌词写代码处理后, 按照格式保存到这个对象)
       curLyric: '', // 当前显示哪句歌词
-      lastLy: '' // 记录当前播放歌词
+      lastLy: '', // 记录当前播放歌词
+      pic: ''
     }
   },
   computed: {
@@ -120,7 +120,16 @@ export default {
           this.curLyric = this.lastLy
         }
       })
-    }
+    },
+    timer() {
+      setTimeout(() => {
+        this.pic = `${this.songInfo && this.songInfo.al && this.songInfo.al.picUrl
+          }?imageView&thumbnail=360y360&quality=75&tostatic=0`
+      }, 500);
+    },
+  },
+  created() {
+    this.timer()
   },
   mounted() {
     this.getSong()

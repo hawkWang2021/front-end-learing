@@ -1,32 +1,17 @@
 <template>
   <div>
-    <van-search
-      shape="round"
-      v-model="keyWord"
-      placeholder="请输入搜索关键词"
-    />
+    <van-search shape="round" v-model="keyWord" placeholder="请输入搜索关键词" />
     <div class="search_wrap" v-if="!keyWord.length">
       <p class="hot_title">热门搜索</p>
       <div class="hot_name_wrap">
-        <span
-          v-for="(item, index) of keyList"
-          :key="index"
-          @click="keyWord = item.first"
-          class="hot_item"
-        >
+        <span v-for="(item, index) of keyList" :key="index" @click="keyWord = item.first" class="hot_item">
           {{ item.first }}
         </span>
       </div>
     </div>
     <div class="search_wrap" v-else>
       <p class="hot_title">最佳匹配</p>
-      <van-list
-        v-model="loading"
-        :finished="finished"
-        finished-text="没有更多了"
-        @load="onLoad"
-        :immediate-check="false"
-      >
+      <van-list v-model="loading" :finished="finished" finished-text="没有更多了" @load="onLoad" :immediate-check="false">
         <!-- MARK: :immediate-check="false" 用于是否在初始化时立即执行滚动位置检查,默认值为 true-->
         <!-- <van-cell
           center
@@ -40,13 +25,8 @@
             <van-icon name="play-circle-o" size="0.6rem" />
           </template>
         </van-cell> -->
-        <song-item
-          v-for="(item, index) of searchList"
-          :key="index"
-          :name="item.name"
-          :author="item.ar[0].name"
-          :id="item.id"
-        ></song-item>
+        <song-item v-for="(item, index) of searchList" :key="index" :name="item.name" :author="item.ar[0].name"
+          :id="item.id"></song-item>
       </van-list>
     </div>
   </div>
@@ -100,14 +80,12 @@ export default {
     },
     async getSearchResult(keywords, isAppend = false) {
       // 输入框值改变
-      console.log('this.page', this.page)
       const { data } = await searchResultAPI({
         keywords,
         limit: 20,
         offset: (this.page - 1) * 20
       })
       const { code, result } = data
-      console.log(result.songs)
       if (code === 200 && result.songCount > 0) {
         if (isAppend) {
           // 追加的情况:放到后面
@@ -121,7 +99,6 @@ export default {
       }
     },
     async onLoad() {
-      console.log('咋回事呀?')
       this.page++
       await this.getSearchResult(this.keyWord, true)
       // 数据更新完毕后，需要将 loading 设置成 false
